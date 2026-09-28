@@ -1,0 +1,72 @@
+/* Base Mystical Theme */
+.tarot-body {
+  background: radial-gradient(circle at 50% 30%, #2a1a2a 0%, #0a050a 100%);
+  color: #e0c9d5;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding-top: 100px; /* Offset for navbar */
+}
+
+/* Twinkling Stars Background */
+.stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.star { position: absolute; background: #c0a0c0; border-radius: 50%; box-shadow: 0 0 15px #c0a0c0; animation: twinkle 4s infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+
+.tarot-container { position: relative; z-index: 2; width: 100%; max-width: 1400px; padding: 2rem; display: flex; flex-direction: column; align-items: center; }
+.tarot-header { text-align: center; margin-bottom: 2rem; animation: fadeInDown 1s ease; }
+.tarot-header h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 0 0 30px rgba(180,130,200,0.6); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.tarot-header p { font-size: 1.1rem; opacity: 0.8; font-style: italic; color: #d0b0d0; }
+
+/* Single Card Picker */
+.card-picker-container { position: relative; width: 100%; height: 350px; display: flex; justify-content: center; align-items: center; margin: 2rem 0; }
+.single-card { width: 200px; height: 290px; background: linear-gradient(135deg, #3a2a3a 0%, #1a0f1a 100%); border: 3px solid #8a6a9a; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(180,130,200,0.3); display: flex; justify-content: center; align-items: center; transition: all 0.5s ease; cursor: pointer; }
+.single-card:hover { box-shadow: 0 30px 60px rgba(180,130,200,0.6); border-color: #c0a0c0; transform: scale(1.05); }
+.single-card.fade-out { animation: mysticalDissolve 0.7s forwards; }
+@keyframes mysticalDissolve { 0% { opacity: 1; filter: blur(0); } 100% { opacity: 0; transform: scale(1.5) rotate(10deg); filter: blur(5px); } }
+
+.deck-container { position: absolute; width: 100%; height: 100%; display: none; }
+.deck-container.active { display: block; }
+.deck-card { position: absolute; width: 200px; height: 290px; background: linear-gradient(135deg, #3a2a3a 0%, #1a0f1a 100%); border: 3px solid #8a6a9a; border-radius: 15px; left: 50%; transform: translateX(-50%); }
+
+/* Four Card Spread (Heart, Head, Path) */
+.spread-row { display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 2rem 0; width: 100%; }
+.position-card { width: 170px; height: 270px; background: rgba(30, 20, 30, 0.7); backdrop-filter: blur(5px); border: 2px solid #8a6a9a; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: pointer; }
+.position-card.active { border-color: #c0a0c0; box-shadow: 0 0 40px rgba(200,150,220,0.8); transform: scale(1.05); animation: glowPulse 2s infinite; }
+.position-card.filled { border-color: #c0a0c0; background: #1a0f1a; padding: 0; overflow: hidden; }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 30px rgba(180,130,200,0.5); } 50% { box-shadow: 0 0 50px rgba(200,150,220,0.8); } }
+
+.progress-indicator { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+.progress-dot { width: 12px; height: 12px; border-radius: 50%; background: #8a6a9a; transition: all 0.3s ease; }
+.progress-dot.active { background: #e0c9d5; box-shadow: 0 0 20px #e0c9d5; transform: scale(1.5); }
+.progress-dot.completed { background: #c0a0c0; box-shadow: 0 0 15px #c0a0c0; transform: scale(1.2); }
+
+/* Fan Overlay */
+.fan-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 5, 10, 0.95); backdrop-filter: blur(15px); z-index: 100; display: none; flex-direction: column; align-items: center; justify-content: center; }
+.fan-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+.fan-cards-container { position: relative; width: 100%; height: 350px; display: flex; justify-content: center; align-items: center; margin-bottom: 2rem; }
+.fan-card { position: absolute; width: 140px; height: 220px; background: linear-gradient(135deg, #2a1a2a 0%, #1a0f1a 100%); border: 2px solid #8a6a9a; border-radius: 12px; cursor: pointer; transform-origin: bottom center; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1); animation: cardReveal 0.5s ease forwards; }
+.fan-card:hover { transform: scale(1.15) translateY(-40px) rotate(0deg) !important; border-color: #c0a0c0; z-index: 1000 !important; }
+@keyframes cardReveal { 0% { opacity: 0; transform: translateY(30px) rotate(0deg); } 100% { opacity: 1; transform: translateY(0) rotate(var(--rotate, 0deg)); } }
+
+/* Results Layouts */
+.reading-layout { display: flex; max-width: 1400px; margin: 0 auto; gap: 3rem; position: relative; z-index: 2; width: 100%; }
+.card-column { flex: 0 0 320px; }
+.info-column { flex: 1; overflow-y: auto; padding-right: 1rem; animation: fadeInContent 1s ease forwards; }
+.info-panel { background: rgba(30, 20, 30, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(138, 106, 154, 0.3); border-radius: 20px; padding: 1.5rem; margin-bottom: 1.5rem; }
+
+@keyframes fadeInContent { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.return-button, .fan-close { padding: 0.8rem 2.5rem; background: rgba(30, 20, 30, 0.7); border: 1.5px solid #8a6a9a; color: #e0c9d5; border-radius: 40px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.return-button:hover, .fan-close:hover { background: #8a6a9a; color: #0a050a; }
+
+/* Grid for Four Card Result */
+.spread-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+.tension-section { background: rgba(30, 20, 30, 0.9); border: 1px solid #c0a0c0; border-radius: 25px; padding: 2rem; margin: 3rem 0; box-shadow: 0 25px 50px rgba(0,0,0,0.5); text-align: center; }
+.heart-head-container { display: grid; grid-template-columns: 1fr 0.6fr 1fr; gap: 1rem; align-items: center; margin-bottom: 2rem; }

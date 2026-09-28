@@ -1,0 +1,241 @@
+/* ===== Global Background Wrapper ===== */
+.astro-explore-body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* ===== Overlay & Fade Logic ===== */
+.page-overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.34));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.4s ease;
+}
+
+.page-overlay.fade-out {
+  opacity: 0;
+}
+
+/* ===== Main Content ===== */
+.astro-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  position: relative;
+}
+
+.astro-main h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 120px;
+  margin-top: -40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 5;
+}
+
+/* ===== Diamonds with Vector Background and Zodiac Icon on Top ===== */
+.diamond-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0 40px 0;
+}
+
+.diamond-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.diamond-images {
+  position: relative;
+  width: 321px;
+  height: 321px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.vector-bg {
+  position: absolute;
+  width: 180px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.zodiac-icon {
+  position: absolute;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  z-index: 2;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  object-fit: contain;
+}
+
+/* Individual sign custom positioning */
+.diamond-wrapper.aries .zodiac-icon,
+.diamond-wrapper.taurus .zodiac-icon,
+.diamond-wrapper.gemini .zodiac-icon { width: 361px; top: 50%; left: 46%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.cancer .zodiac-icon { width: 361px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.leo .zodiac-icon { width: 361px; top: 50%; left: 47%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.virgo .zodiac-icon,
+.diamond-wrapper.sagittarius .zodiac-icon,
+.diamond-wrapper.capricorn .zodiac-icon,
+.diamond-wrapper.aquarius .zodiac-icon { width: 361px; top: 50%; left: 45%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.libra .zodiac-icon { width: 361px; top: 50%; left: 44%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.scorpio .zodiac-icon { width: 361px; top: 50%; left: 48%; transform: translate(-50%, -50%); }
+
+.diamond-wrapper.pisces .zodiac-icon { width: 361px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Hover effect - zodiac icon fades out, name appears */
+.diamond-wrapper:hover .zodiac-icon {
+  opacity: 0;
+}
+
+.sign-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #fff, #f0e68c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 100%;
+  z-index: 3;
+}
+
+.diamond-wrapper:hover .sign-name {
+  opacity: 1;
+}
+
+/* Element-specific glow effects triggered by parent body class */
+.fire .zodiac-icon:hover { filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.6)); }
+.water .zodiac-icon:hover { filter: drop-shadow(0 0 15px rgba(33, 150, 243, 0.6)); }
+.air .zodiac-icon:hover { filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.6)); }
+.earth .zodiac-icon:hover { filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.6)); }
+
+/* ===== Arrows ===== */
+.astro-arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 48px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  color: white;
+  transition: transform .3s;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.astro-arrow.left { left: 60px; transform: translateY(-50%); }
+.astro-arrow.right { right: 60px; transform: translateY(-50%); }
+.astro-arrow:hover { transform: translateY(-50%) scale(1.2); }
+
+/* ===== Sign Detail Page ===== */
+.sign-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 20px 40px; /* Offset for navbar */
+}
+
+.sign-card {
+  background: rgba(99, 99, 99, 0.36);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 60px;
+  max-width: 900px;
+  width: 100%;
+  color: #fdfdfd;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.55);
+  text-align: left;
+  position: relative;
+}
+
+.sign-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border: 1.5px solid rgba(99, 99, 99, 0.54);
+  border-radius: 30px;
+  pointer-events: none;
+}
+
+.sign-title { font-size: 72px; line-height: 1.02; margin: 8px 0 8px; font-weight: 800; }
+.sign-tagline { font-size: 24px; font-weight: 700; margin: 0 0 12px; }
+.sign-dates { font-size: 19px; color: rgba(255,255,255,0.8); margin: 0 0 32px; }
+
+.sign-section { margin: 28px 0 36px; }
+.sign-section h3 { margin: 0 0 12px; font-size: 32px; }
+.sign-section p { margin: 0; line-height: 1.75; font-size: 18px; color: #f0f0f0; }
+
+.sign-actions { display: flex; align-items: center; gap: 18px; margin-top: 40px; }
+.astro-cta {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.astro-cta:hover { transform: translateY(-1px); opacity: .9; color: #fff; }
+
+@media (max-width: 768px) {
+  .astro-arrow { display: none; }
+  .astro-main h2 { margin-bottom: 40px; }
+  .sign-card { padding: 30px; }
+  .sign-title { font-size: 48px; }
+}
