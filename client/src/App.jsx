@@ -24,6 +24,11 @@ import FourCardPicker from './pages/tarot/FourCardPicker';
 import SingleCardResult from './pages/tarot/SingleCardResult';
 import FourCardResult from './pages/tarot/FourCardResult';
 
+// Aesthetic Quiz Pages
+import AestheticWelcome from './pages/quizzes/AestheticWelcome';
+import AestheticQuiz from './pages/quizzes/AestheticQuiz';
+import AestheticResult from './pages/quizzes/AestheticResult';
+
 // Global Styles
 import './styles/global.css';
 
@@ -52,6 +57,11 @@ export default function App() {
           <Route path="/tarot/four" element={<FourCardPicker />} />
           <Route path="/tarot/single-result/:id" element={<SingleCardResult />} />
           <Route path="/tarot/four-result" element={<FourCardResult />} />
+
+          {/* Aesthetic Quiz Module */}
+          <Route path="/aesthetic-welcome" element={<ProtectedRoute><AestheticWelcome /></ProtectedRoute>} />
+          <Route path="/aesthetic-quiz" element={<ProtectedRoute><AestheticQuiz /></ProtectedRoute>} />
+          <Route path="/aesthetic-result/:resultId?" element={<ProtectedRoute><AestheticResult /></ProtectedRoute>} />
 
           {/* Auth & Dashboard */}
           <Route path="/register" element={<Register />} />
